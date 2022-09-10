@@ -1,0 +1,17 @@
+---
+stages:
+  - docker
+  - post
+
+variables:
+  DOCKER_IMAGE_NAME: cenk1cenk2/goploader
+  IMAGE_TAGS: latest
+  README_DESCRIPTION: |
+    Depado/goploader in a docker container.
+
+include:
+  - project: devops/pipes
+    file: /templates/docker-build-dockerhub.gitlab-ci.yml
+
+  - project: devops/pipes
+    file: /templates/update-docker-hub-readme.gitlab-ci.yml
