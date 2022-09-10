@@ -3,9 +3,13 @@ FROM golang:1.18-alpine
 # Install Tini
 RUN apk --no-cache --no-progress add tini
 
+WORKDIR /opt/goploader
+
 RUN go install -v github.com/Depado/goploader/server@latest && \
   cd $GOPATH/pkg/mod/github.com/!depado/goploader*/server && \
-  mv -v assets templates /go/bin/server /opt/goploader
+  mv -v assets templates /go/bin/server /opt/goploader && \
+  rm -r $GOPATH/pkg/mod
+
 
 WORKDIR /opt/goploader
 
